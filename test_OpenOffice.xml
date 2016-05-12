@@ -1,0 +1,215 @@
+<?xml version='1.0' encoding='UTF-8' standalone='yes'?>
+<?mso-application progid='Word.Document'?>
+<w:wordDocument xmlns:dt='uuid:C2F41010-65B3-11d1-A29F-00AA00C14882' xmlns:v='urn:schemas-microsoft-com:vml' xmlns:fo='urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0' xmlns:w10='urn:schemas-microsoft-com:office:word' xmlns:w='http://schemas.microsoft.com/office/word/2003/wordml' xmlns:wx='http://schemas.microsoft.com/office/word/2003/auxHint' xmlns:o='urn:schemas-microsoft-com:office:office' xml:space='preserve' w:embeddedObjPresent='no'>
+
+
+<w:p><w:pPr><w:pStyle w:val='P1'/></w:pPr><w:r><w:t>
+</w:t></w:r></w:p>
+
+
+<w:p><w:pPr><w:pStyle w:val='P1'/></w:pPr><w:r><w:t>
+</w:t></w:r></w:p>
+
+
+<w:p><w:pPr><w:pStyle w:val='P1'/></w:pPr><w:r><w:t>
+</w:t></w:r></w:p>
+
+
+<w:p><w:pPr><w:pStyle w:val='P1'/></w:pPr><w:r><w:t>
+</w:t></w:r></w:p>
+
+
+<w:fonts>
+<w:font w:name='Times New Roman'><w:family w:val='Roman'/><w:pitch w:val='variable'/></w:font>
+<w:font w:name="Arial"><w:family w:val='Swiss'/><w:pitch w:val='variable'/></w:font>
+<w:font w:name="Arial"><w:family w:val='Swiss'/><w:pitch w:val='variable'/></w:font>
+</w:fonts>
+
+
+<w:styles>
+
+
+
+<w:style w:styleId='Heading' w:type='paragraph'><w:basedOn w:val='Standard'/><w:name w:val='Heading'/><w:next w:val='Text_20_body'/><w:pPr><w:adjustRightInd w:val='off'/><w:spacing w:before='239.841' w:after='120.204'/><w:ind/><w:widowControl w:val='off'/><w:pBdr/><w:ind/></w:pPr><w:rPr><w:rFonts w:ascii="Arial" w:h-ansi="Arial" w:fareast='Microsoft YaHei' w:cs='Lucida Sans'/><w:sz w:val='52'/></w:rPr></w:style>
+
+<w:style w:styleId='Heading_20_1' w:type='paragraph'><w:basedOn w:val='Heading'/><w:name w:val='Heading_20_1'/><w:next w:val='Text_20_body'/><w:rPr><w:b/></w:rPr></w:style><w:style w:styleId='P3' w:type='paragraph'><w:basedOn w:val='Heading_20_1'/><w:name w:val='P3'/><w:hidden w:val='on'/><w:pPr><w:adjustRightInd w:val='off'/><w:jc w:val='center'/><w:spacing/><w:ind/><w:widowControl w:val='off'/><w:pBdr/><w:ind/></w:pPr></w:style>
+
+<w:style w:styleId='P3' w:type='paragraph'><w:basedOn w:val='Heading_20_1'/><w:name w:val='P3'/><w:hidden w:val='on'/><w:pPr><w:adjustRightInd w:val='off'/><w:jc w:val='center'/><w:spacing/><w:ind/><w:widowControl w:val='off'/><w:pBdr/><w:ind/></w:pPr></w:style>
+
+<w:style w:styleId='Text_20_body' w:type='paragraph'><w:basedOn w:val='Standard'/><w:name w:val='Text_20_body'/><w:pPr><w:adjustRightInd w:val='off'/><w:jc w:val='justify'/><!--Alineacion default es left--><w:spacing w:before='0' w:after='120.204'/><w:ind/><w:widowControl w:val='off'/><w:pBdr/><w:ind/></w:pPr></w:style>
+
+<w:style w:styleId='P1' w:type='paragraph'><w:basedOn w:val='Text_20_body'/><w:name w:val='P1'/><w:hidden w:val='on'/><w:rPr><w:rFonts w:ascii="Arial" w:h-ansi="Arial"/><w:sz w:val='24'/></w:rPr></w:style>
+
+<w:style w:styleId='P2' w:type='paragraph'><w:basedOn w:val='Salutation'/><w:name w:val='P2'/><w:pPr><w:spacing w:before='500' w:after='120.204'/></w:pPr><w:hidden w:val='on'/><w:rPr><w:spacing w:before='300' w:after='120.204'/><w:rFonts w:ascii="Arial" w:h-ansi="Arial"/><w:sz w:val='24'/></w:rPr></w:style>
+
+</w:styles>
+
+
+
+	<w:body>
+
+
+
+
+<w:p><w:pPr><w:pStyle w:val='P3'/></w:pPr><w:r><w:t>
+Lorem
+Ipsum
+</w:t></w:r></w:p>
+
+
+<w:p><w:pPr><w:pStyle w:val='P1'/></w:pPr><w:r><w:t>
+Lorem
+ipsum
+dolor
+sit
+amet,
+consectetur
+adipiscing
+elit.
+Cras
+tincidunt
+ante
+magna,
+non
+venenatis
+turpis
+ornare
+nec.
+Cras
+tempor
+magna
+in
+auctor
+iaculis.
+Fusce
+non
+libero
+risus.
+Mauris
+fermentum,
+ex
+eget
+venenatis
+molestie,
+dolor
+lectus
+convallis
+orci,
+vel
+porta
+eros
+mauris
+bibendum
+metus.
+Vestibulum
+luctus
+egestas
+ultricies.
+Sed
+sit
+amet
+purus
+metus.
+Etiam
+non
+rhoncus
+sem.
+Nunc
+ut
+metus
+at
+elit
+varius
+scelerisque.
+Morbi
+sit
+amet
+vulputate
+augue,
+eget
+mollis
+diam.
+Phasellus
+scelerisque
+convallis
+sapien
+ultricies
+vulputate.
+Vestibulum
+rhoncus
+sagittis
+auctor.
+</w:t></w:r></w:p>
+
+
+<w:p><w:pPr><w:pStyle w:val='P1'/></w:pPr><w:r><w:t>
+dolor
+lectus
+convallis
+orci,
+vel
+porta
+eros
+mauris
+bibendum
+metus.
+Vestibulum
+luctus
+egestas
+ultricies.
+Sed
+sit
+amet
+purus
+metus.
+Etiam
+non
+rhoncus
+sem.
+Nunc
+ut
+metus
+at
+elit
+varius
+scelerisque.
+</w:t></w:r></w:p>
+
+
+<w:p><w:pPr><w:pStyle w:val='P1'/></w:pPr><w:r><w:t>
+Morbi
+sit
+amet
+vulputate
+augue,
+eget
+mollis
+diam.
+Phasellus
+scelerisque
+convallis
+sapien
+ultricies
+vulputate.
+Vestibulum
+rhoncus
+sagittis
+auctor.
+</w:t></w:r></w:p>
+
+
+<w:p><w:pPr><w:pStyle w:val='P2'/></w:pPr><w:r><w:t>
+Esta
+es
+la
+conclusion
+del
+archivo
+hola
+maestra
+como
+esta
+</w:t></w:r></w:p>
+	</w:body>
+
+</w:wordDocument>

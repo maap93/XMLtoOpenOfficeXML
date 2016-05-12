@@ -1,0 +1,45 @@
+<w:wordDocument>
+
+    <o:DocumentProperties>
+
+        <!--Esta es la fuente y el size del titulo-->
+        <t:font w:font="Arial"></t:font>
+        <!--La fontsize es el doble-->
+        <t:size w:val =52></t:size>
+
+        <!--Esta es la fuente y el size del contenido-->
+        <p:font w:font="Arial"></p:font>
+        <t:size w:val =24></t:size>
+
+    </o:DocumentProperties>
+    
+    <t:documentTitle>
+        Lorem Ipsum
+    </t:documentTitle>
+    
+    <w:body>
+
+        <!--Este es el primer parrafo-->
+        <p:paragraph>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras tincidunt ante magna, non venenatis turpis ornare nec. Cras tempor magna in auctor iaculis. Fusce non libero risus. Mauris fermentum, ex eget venenatis molestie, dolor lectus convallis orci, vel porta eros mauris bibendum metus. Vestibulum luctus egestas ultricies. Sed sit amet purus metus. Etiam non rhoncus sem. Nunc ut metus at elit varius scelerisque. Morbi sit amet vulputate augue, eget mollis diam. Phasellus scelerisque convallis sapien ultricies vulputate. Vestibulum rhoncus sagittis auctor.
+        </p:paragraph>
+
+        <!--Este es el segundo parrafo-->
+        <p:paragraph>
+            dolor lectus convallis orci, vel porta eros mauris bibendum metus. Vestibulum luctus egestas ultricies. Sed sit amet purus metus. Etiam non rhoncus sem. Nunc ut metus at elit varius scelerisque.
+        </p:paragraph>
+
+        <!--Este es el tercero parrafo-->
+        <p:paragraph>
+            Morbi sit amet vulputate augue, eget mollis diam. Phasellus scelerisque convallis sapien ultricies vulputate. Vestibulum rhoncus sagittis auctor.
+        </p:paragraph>
+
+    </w:body>
+    
+    <w:documentConclusion>
+        Esta es la conclusion del archivo
+        hola maestra
+        como esta
+    </w:documentConclusion>
+
+</w:wordDocument>

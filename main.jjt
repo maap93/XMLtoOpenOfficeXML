@@ -1,0 +1,485 @@
+options {
+	STATIC = false;
+}
+
+PARSER_BEGIN(Compis)
+import java.io.*;
+import java.util.*;
+import java.io.File;
+
+
+public class Compis 
+{
+    private PrintWriter outFile;
+    public static int[] arr = new int[10];
+    public static String[] arrFonts = new String[10];
+
+    public static int contArr = 0;
+    public static int contArrFonts = 0;
+    public static boolean contElementos = false;
+
+    public static boolean tagsIgualesLetras = false;
+    public static boolean tagsIgualesAttr = false;
+
+    public static boolean contFonts = false;
+
+    public static String firstFont="Times New Roman";
+    public static String secondFont="Times New Roman";
+
+    public static int firstFontSize;
+    public static int secondFontSize;
+
+
+    public static int checarTagsConInts1;
+    public static int checarTagsConInts2;
+    public static int checarTagsConInts3;
+    public static int checarTagsConInts4;
+
+
+   
+
+    public static void main(String[] args) throws IOException, ParseException
+    {
+        Compis parser;
+        
+        String filename = "";
+
+        //Para imprimir en archivo externo
+        String outFileName = "_OpenOffice.xml";
+        PrintWriter outFile = new PrintWriter(outFileName);
+
+
+
+
+        if(args.length == 0)
+        {
+            System.out.println ("Compis: Reading input ...");
+            parser = new Compis(System.in);
+        } else if(args.length == 1)
+            {
+                filename = args[0];
+                System.out.println ("Compis: Reading the file " + filename + " ..." );
+            
+            try 
+            {
+                parser = new Compis(new java.io.FileInputStream(filename));
+                
+                parser.outFile = outFile;
+            }catch(java.io.FileNotFoundException e) {
+                System.out.println ("Compis: The file " + filename + " was not found.");
+                return;
+            }
+
+            } else {
+                System.out.println ("Compis:  You must use one of the following:");
+                System.out.println ("         java Compis < file");
+                System.out.println ("Or");
+                System.out.println ("         java Compis file");
+                
+                return ;
+            }
+
+        try {
+
+            if(filename.contains(".")){
+                filename = filename.substring(0, filename.lastIndexOf("."));
+            }
+
+            //Create header of output file
+            String xmlVersion = "<?xml version='1.0' encoding='UTF-8' standalone='yes'?>\n";
+            String appType = "<?mso-application progid='Word.Document'?>\n";
+            String header = "<w:wordDocument ";
+            String schemaInfo = "xmlns:dt='uuid:C2F41010-65B3-11d1-A29F-00AA00C14882' ";
+            String schemaInfo1 = "xmlns:v='urn:schemas-microsoft-com:vml' ";
+            String schemaInfo2 ="xmlns:fo='urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0' ";
+            String schemaInfo3 ="xmlns:w10='urn:schemas-microsoft-com:office:word' ";
+            String schemaInfo4 ="xmlns:w='http://schemas.microsoft.com/office/word/2003/wordml' ";
+            String schemaInfo5 ="xmlns:wx='http://schemas.microsoft.com/office/word/2003/auxHint' ";
+            String schemaInfo6 ="xmlns:o='urn:schemas-microsoft-com:office:office' ";
+            String schemaInfo7 ="xml:space='preserve' ";
+            String schemaInfo8 ="w:embeddedObjPresent='no'>";
+
+
+           outFile.println(xmlVersion + appType + header + schemaInfo + schemaInfo1 + schemaInfo2 + schemaInfo3 + schemaInfo4 + schemaInfo5 + schemaInfo6 + schemaInfo7 + schemaInfo8);
+
+            SimpleNode root = parser.start();
+
+            root.dump("");
+            outFile.println("</w:wordDocument>");
+            outFile.close();
+            System.out.println ("Lexical and sintax analysis completed.");
+
+
+            //Renombrar el archivo de salida
+              File f = null;
+              File f1 = null;
+              boolean bool = false;
+              
+              try{      
+                 // create new File objects
+                 f = new File("C:\\Users\\MiguelAngel\\Desktop\\ProyectoCompisConAST\\_OpenOffice.xml");
+                 f1 = new File("C:\\Users\\MiguelAngel\\Desktop\\ProyectoCompisConAST\\"+filename+"_OpenOffice.xml");
+                 
+                 // rename file
+                 bool = f.renameTo(f1);
+                 
+                 // print
+                 System.out.print("File renamed? "+bool);
+                 
+              }catch(Exception e){
+                 // if any error occurs
+                 e.printStackTrace();
+              }
+
+            //Fin de renombrar el archivo
+
+            
+        }
+            catch(TokenMgrError e){ 
+                outFile.close();
+                System.out.println("Compis: There was an error with the token manager.");
+                System.out.println(e.getMessage());
+                
+            }
+            catch(ParseException e)
+            {
+                outFile.close();
+                System.out.println("Errores del parser: ");
+                System.out.println(e.getMessage());
+                
+            }
+    }
+
+    public static List<Token> tokenize(Compis parser) 
+    {
+        List<Token> tokens = new ArrayList<Token>();
+        
+        Token token = parser.getNextToken();
+        
+        while (token.kind != CompisConstants.EOF)
+        {
+            tokens.add(token);
+            token = parser.getNextToken();
+        }
+
+        return tokens;
+    }
+
+    
+}
+
+
+
+PARSER_END(Compis)
+
+        SKIP : 
+        {
+        	"\t"
+        	|"\n"
+        	|"\r"
+        	|" "
+            | <START_COMMENT : ["<"]["!"]["-"]["-"] >
+            | <END_COMMENT : ["-"]["-"][">"] >
+            | <COMMENTS : <START_COMMENT>(" "|["a"-"z","A"-"Z"])+<END_COMMENT> > 
+        }
+
+        //Tags reservadas
+        TOKEN:
+        {
+        	<START_DOCUMENT : "<w:wordDocument>">
+        	|<END_DOCUMENT : "</w:wordDocument>">
+        	|<START_DOCUMENT_PROPERTIES : "<o:DocumentProperties>">
+        	|<END_DOCUMENT_PROPERTIES : "</o:DocumentProperties>">
+        	|<START_TITLE : "<t:documentTitle>">
+        	|<END_TITLE : "</t:documentTitle>">
+        	|<START_BODY : "<w:body>">
+        	|<END_BODY : "</w:body>">
+        	|<START_CONCLUSION : "<w:documentConclusion>">
+        	|<END_CONCLUSION : "</w:documentConclusion>">
+        }
+
+        //Atributos de las tags
+        TOKEN:
+        {
+        	<STYLE_TAG : "w:style">
+        	| <VAL_TAG : "w:val" >
+        	| <HEIGHT_TAG :"w:height" >
+        	| <TYPE_TAG : "w:type">
+        	| <FONT_TAG : "w:font" >
+        }
+
+        //Expresiones regulares
+        TOKEN: 
+        {
+        	<LETTERS : ["a"-"z","A"-"Z"]>
+        	| <DIGITS : (["0"-"9"])+ >
+        	| <ASSIGN_ATTRIBUTE : ":" >
+        	| <EQUAL : "=" >
+        	| <QUOTE : "\"" >
+        	| <WORD : (<LETTERS>|"."|"-"|"_"|","|";"|(<DIGITS>))+ > 
+        	| <TAG_NAME : (<LETTERS>)+ >
+        	| <STRING : <QUOTE>(<LETTERS>|<DIGITS>)(<LETTERS>|"."|"-"|"_"|","|" "|";"|(<DIGITS>)?)+<QUOTE> >
+        	| <SHELL_SYM : "$" >
+        	| <OPEN_TAG : "<" >
+        	| <OPEN_CLOSING_TAG : <OPEN_TAG>["/"] >
+        	| <CLOSE_TAG_NORMAL : ">" >
+        	| <OPEN_CLOSE_TAG : ["/"]<CLOSE_TAG_NORMAL> >
+        	| <URL : ["h"]["t"]["t"]["p"](["s"])?[":"](["/"]["/"])?<WORD>["."]<WORD>(["/"])? >
+        }
+
+        
+        
+
+//Gramatica
+
+SimpleNode start() #START:{ Token t1, t2;}
+{
+
+	t1=<START_DOCUMENT>{
+        System.out.println(t1.image);
+        /*outFile.println("test of image: " + t1.image);*/
+    }
+    documentStructure()
+    t2=<END_DOCUMENT>{System.out.println(t2.image);}
+    <EOF>{return jjtThis;}
+}
+
+void documentStructure() #DOC_STRUCT: {}
+{
+		try{
+        docProperties()
+        docTitle()
+        docBody()
+        docConclusion()
+    }
+    catch(ParseException e){
+        System.out.println("Errores del parser: ");
+    System.out.println(e.getMessage());
+    while(getToken(1).kind != OPEN_TAG && getToken(1).kind != EOF)
+    {
+        getNextToken();
+    }
+    if(getToken(1).kind != EOF)
+    {
+        getNextToken();
+    }
+    }
+}
+
+void docProperties() #PROPERTIES:{Token t1, t2;}
+{
+	t1=<START_DOCUMENT_PROPERTIES>
+	(exprList()|content())
+	t2=<END_DOCUMENT_PROPERTIES>
+
+    {
+        firstFontSize=arr[0];
+        secondFontSize=arr[1];
+        //System.out.println("esta es la primer font: " + firstFontSize);
+        //System.out.println("esta es la segunda font: " + secondFontSize);
+
+        firstFont = arrFonts[0];
+        if(firstFont == null)
+        {
+            firstFont ="'"+"Times New Roman"+"'";
+        }
+
+        secondFont = arrFonts[1];
+        if(secondFont == null)
+        {
+            secondFont = "'"+"Times New Roman"+"'";
+        }
+        
+         //Define defaultFonts
+            String fontTagDeclaration = "\n\n<w:fonts>\n";
+            String font1 = "<w:font w:name='Times New Roman'><w:family w:val='Roman'/><w:pitch w:val='variable'/></w:font>\n";
+            String font2 = "<w:font w:name="+firstFont+"><w:family w:val='Swiss'/><w:pitch w:val='variable'/></w:font>\n";
+            String font3 = "<w:font w:name="+secondFont+"><w:family w:val='Swiss'/><w:pitch w:val='variable'/></w:font>\n";
+            String fontTagDeclarationEnd = "</w:fonts>\n";
+
+
+            //Define styles
+            String stylesTagDeclaration = "\n<w:styles>\n\n";
+            
+            String titleStyle1 = "\n\n<w:style w:styleId='Heading' w:type='paragraph'><w:basedOn w:val='Standard'/><w:name w:val='Heading'/><w:next w:val='Text_20_body'/><w:pPr><w:adjustRightInd w:val='off'/><w:spacing w:before='239.841' w:after='120.204'/><w:ind/><w:widowControl w:val='off'/><w:pBdr/><w:ind/></w:pPr><w:rPr><w:rFonts w:ascii="+firstFont+" w:h-ansi="+firstFont+" w:fareast='Microsoft YaHei' w:cs='Lucida Sans'/><w:sz w:val="+"'"+firstFontSize+"'"+"/></w:rPr></w:style>";
+            String titleStyle2 = "\n\n<w:style w:styleId='Heading_20_1' w:type='paragraph'><w:basedOn w:val='Heading'/><w:name w:val='Heading_20_1'/><w:next w:val='Text_20_body'/><w:rPr><w:b/></w:rPr></w:style><w:style w:styleId='P3' w:type='paragraph'><w:basedOn w:val='Heading_20_1'/><w:name w:val='P3'/><w:hidden w:val='on'/><w:pPr><w:adjustRightInd w:val='off'/><w:jc w:val='center'/><w:spacing/><w:ind/><w:widowControl w:val='off'/><w:pBdr/><w:ind/></w:pPr></w:style>";
+            String titleStyle3 = "\n\n<w:style w:styleId='P3' w:type='paragraph'><w:basedOn w:val='Heading_20_1'/><w:name w:val='P3'/><w:hidden w:val='on'/><w:pPr><w:adjustRightInd w:val='off'/><w:jc w:val='center'/><w:spacing/><w:ind/><w:widowControl w:val='off'/><w:pBdr/><w:ind/></w:pPr></w:style>";
+            
+            String bodyStyle1 ="\n\n<w:style w:styleId='Text_20_body' w:type='paragraph'><w:basedOn w:val='Standard'/><w:name w:val='Text_20_body'/><w:pPr><w:adjustRightInd w:val='off'/><w:jc w:val='justify'/><!--Alineacion default es left--><w:spacing w:before='0' w:after='120.204'/><w:ind/><w:widowControl w:val='off'/><w:pBdr/><w:ind/></w:pPr></w:style>";
+            String bodyStyle2 = "\n\n<w:style w:styleId='P1' w:type='paragraph'><w:basedOn w:val='Text_20_body'/><w:name w:val='P1'/><w:hidden w:val='on'/><w:rPr><w:rFonts w:ascii="+secondFont+" w:h-ansi="+secondFont+"/><w:sz w:val="+"'"+secondFontSize+"'"+"/></w:rPr></w:style>";
+
+            String conclusionStyle1 = "\n\n<w:style w:styleId='P2' w:type='paragraph'><w:basedOn w:val='Salutation'/><w:name w:val='P2'/><w:pPr><w:spacing w:before='500' w:after='120.204'/></w:pPr><w:hidden w:val='on'/><w:rPr><w:spacing w:before='300' w:after='120.204'/><w:rFonts w:ascii="+secondFont+" w:h-ansi="+secondFont+"/><w:sz w:val="+"'"+secondFontSize+"'"+"/></w:rPr></w:style>";
+
+            String stylesTagDeclarationEnd = "\n\n</w:styles>\n\n";
+    
+            
+            
+            outFile.println(fontTagDeclaration + font1 + font2 + font3 + fontTagDeclarationEnd);
+            outFile.println(stylesTagDeclaration + titleStyle1 + titleStyle2 + titleStyle3 + bodyStyle1 + bodyStyle2 + conclusionStyle1 + stylesTagDeclarationEnd);
+
+    }
+}
+
+void docTitle() #TITLE: {Token t1;}
+{
+    {outFile.println("\n\t<w:body>\n\n");}
+	<START_TITLE>
+	(exprList()|{outFile.println("\n\n<w:p><w:pPr><w:pStyle w:val='P3'/></w:pPr><w:r><w:t>");}
+        content()
+        {outFile.println("</w:t></w:r></w:p>");}
+    )
+	<END_TITLE>
+}
+
+void docBody() #BODY: {Token t1;}
+{
+	<START_BODY>
+	(exprList()|
+        {outFile.println("\n\n<w:p><w:pPr><w:pStyle w:val='P1'/></w:pPr><w:r><w:t>");}
+        content()
+        {outFile.println("</w:t></w:r></w:p>");}
+    )
+	<END_BODY>
+}
+
+void docConclusion() #CONCLUSION: {}
+{
+	<START_CONCLUSION>
+	(exprList()|
+        {outFile.println("\n\n<w:p><w:pPr><w:pStyle w:val='P2'/></w:pPr><w:r><w:t>");}
+        content()
+        {outFile.println("</w:t></w:r></w:p>");}
+    )
+	<END_CONCLUSION>
+    {outFile.println("\t</w:body>\n");}
+}
+
+
+
+void exprList() #EXPR_LIST: {Token t1, t2, t3, t4;}
+{
+	(<OPEN_TAG>t1=<LETTERS><ASSIGN_ATTRIBUTE>t2=<WORD>
+        tagList(){outFile.println("\n\n<w:p><w:pPr><w:pStyle w:val='P1'/></w:pPr><w:r><w:t>");}
+        content(){outFile.println("</w:t></w:r></w:p>");}
+    <OPEN_CLOSING_TAG>t3=<LETTERS><ASSIGN_ATTRIBUTE>t4=<WORD>{
+        
+        
+        String temporal1 = t1.image.toString();
+        String temporal2 = t2.image.toString();
+        String temporal3 = t3.image.toString();
+        String temporal4 = t4.image.toString();
+
+        //System.out.println("Valor de la primer imagen: " + temporal1);
+        //System.out.println("Valor de la segunda imagen: " + temporal2);
+        //System.out.println("Valor de la tercer imagen: " + temporal3);
+        //System.out.println("Valor de la cuarta imagen: " + temporal4);
+
+        if(temporal1.equals(temporal3))
+        {
+            tagsIgualesLetras = true;
+            //System.out.println("oli " + tagsIgualesLetras);
+        }else
+        {
+            tagsIgualesLetras=false;
+            System.out.println("La letra con que empiezan deben ser iguales, se encontro: "+temporal1+" y "+temporal3);
+        }
+
+        if(temporal2.equals(temporal4))
+        {
+            tagsIgualesAttr = true;
+        }
+        else
+        {
+            tagsIgualesAttr = false;
+            System.out.println("El attributo con que empiezan deben ser iguales, se encontro: "+temporal2+" y "+temporal4);
+        }
+
+
+        if(tagsIgualesLetras==false || tagsIgualesAttr==false)
+        {
+            System.out.println("Las tags no coinciden, revisa el archivo");
+            
+            System.exit(0);
+        }
+        
+        //checarTagsConInts1 = Integer.parseInt(temporal1);
+        //checarTagsConInts2 = Integer.parseInt(temporal2);
+        //checarTagsConInts3 = Integer.parseInt(temporal3);
+        //checarTagsConInts4 = Integer.parseInt(temporal4);
+
+        /*if(checarTagsConInts1==checarTagsConInts2)
+        {
+            tagsIguales = true;    
+        }
+        System.out.println("valor del booleano: " + tagsIguales);*/
+        
+    }<CLOSE_TAG_NORMAL> )+
+
+    
+}
+
+
+
+void tagList() #TAG_LIST : {}
+{
+	((tag_string()|tag_int()) tagList() | <CLOSE_TAG_NORMAL>)
+}
+
+void tag_int() #TAG_INT: {Token t1;}
+{
+
+    <VAL_TAG><EQUAL>t1=<DIGITS>//{System.out.println(t1.image);}
+
+    {
+        String temp = t1.image;
+        //System.out.println("Este es el temporal: "+temp);
+        contElementos=true;
+
+        while(contArr<2 && contElementos)
+        {
+            contElementos=false;
+            arr[contArr] = Integer.parseInt(temp);
+            //System.out.println("Este es el valor de arr en la posicion: "+contArr+" y el valor es: "+arr[contArr]);
+            contArr++;
+        }
+    }
+}
+
+void tag_string() #TAG_STRING: {Token t1;}
+{
+	<FONT_TAG><EQUAL>t1=<STRING>//{System.out.println(t1.image);}
+
+    {
+        String tempFont = t1.image;
+        //System.out.println("Este es el temporal: "+tempFont);
+        contFonts=true;
+
+        while(contArrFonts<2 && contFonts)
+        {
+            contFonts=false;
+            arrFonts[contArrFonts] = tempFont;
+            //System.out.println("Este es el valor de arrFonts en la posicion: "+contArrFonts+" y el valor es: "+arrFonts[contArrFonts]);
+            contArrFonts++;
+        }
+    }
+}
+
+void content() #CONTENT: {Token t1; String test;}
+{
+	( LOOKAHEAD(2)(finalContent()) | {})
+}
+
+
+void finalContent() #FINALCONTENT: {Token t1, t2;}
+{
+    ((t1=<WORD>{outFile.println(t1.image);})+
+        |t2=<LETTERS>{outFile.println(t2.image);})
+}
+
+
+
+
+
+
+
+

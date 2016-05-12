@@ -1,0 +1,36 @@
+<w:wordDocument>
+
+    <o:DocumentProperties>
+
+        <!--Esta es la fuente y el size del titulo-->
+        <t:font w:font="hola"></t:font>
+        <!--La fontsize es el doble-->
+        <t:size w:val ="hola"></j:size>
+
+        <!--Esta es la fuente y el size del contenido-->
+        <p:font w:font="Comic Sans MS"></p:font>
+        <t:size w:val =42></t:size>
+
+    </o:DocumentProperties>
+    
+    <t:documentTitle>
+        Lorem Ipsum
+    </t:documentTitle>
+    
+    <w:body>
+
+        
+
+        <!--Este es el tercero parrafo-->
+        <p:paragraph>
+            Morbi sit amet vulputate augue, eget mollis diam. Phasellus scelerisque convallis sapien ultricies vulputate. Vestibulum rhoncus sagittis auctor.
+        </p:paragraph>
+
+    </w:body>
+    
+    <w:documentConclusion>
+        Esta es la conclusion del archivo
+       
+    </w:documentConclusion>
+
+</w:wordDocument>

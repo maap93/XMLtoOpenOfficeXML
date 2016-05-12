@@ -1,0 +1,5 @@
+// Token analysis file
+// Every token is separated by a new line
+// The first element is the class of the token
+// The second element is the value of the token
+<WORD>, test.txt

@@ -1,0 +1,26 @@
+<w:wordDocument>
+
+    <o:DocumentProperties>
+
+       
+
+    </o:DocumentProperties>
+    
+    <t:documentTitle>
+        Lorem Ipsum
+    </t:documentTitle>
+    
+    <w:body>
+
+        <!--Este es el primer parrafo-->
+        <p:paragraph>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras tincidunt ante magna, non venenatis turpis ornare nec. Cras tempor magna in auctor iaculis. Fusce non libero risus. Mauris fermentum, ex eget venenatis molestie, dolor lectus convallis orci, vel porta eros mauris bibendum metus. Vestibulum luctus egestas ultricies. Sed sit amet purus metus. Etiam non rhoncus sem. Nunc ut metus at elit varius scelerisque. Morbi sit amet vulputate augue, eget mollis diam. Phasellus scelerisque convallis sapien ultricies vulputate. Vestibulum rhoncus sagittis auctor.
+        </p:paragraph>
+
+    </w:body>
+    
+    <w:documentConclusion>
+       
+    </w:documentConclusion>
+
+</w:wordDocument>
